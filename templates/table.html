@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>table details</title>
+</head>
+<body>
+    {{data}}
+<style>
+    .stu_table {
+        border: 1px solid black;
+        border-collapse: collapse;
+        width: 80%;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    a {
+        text-decoration: none;
+    }
+</style>
+<table class="stu_table">
+    <tr>
+        <th>Serial No</th>
+        <th>NAME</th>
+        <th>AGE</th>
+        <th>ROLL NO</th>
+        <th colspan="5">MARKS</th>
+        <th colspan="2">Action</th>
+    </tr>
+    {% for student in data %}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{ student.Name }}</td>
+        <td>{{ student.Age }}</td>
+        <td>{{ student.Roll_No }}</td>
+        {% for mark in student.Marks %}
+            <td>{{ mark }}</td>
+        {% endfor %}
+        <td><a href="{{url_for('edit',id=loop.index)}}">Edit</a></td>
+        <td><a href="{{url_for('del_fun',id=loop.index)}}">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+<button><a href="{{url_for('home_fun')}}">Add student</a></button>
+<button><a href="{{url_for('logout_fun')}}">logout</a></button>
+
+</body>
+</html>
+
